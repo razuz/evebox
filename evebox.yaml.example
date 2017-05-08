@@ -37,7 +37,7 @@ http:
 database:
 
   # Database type: elasticsearch, sqlite.
-  type: elasticsearch
+  type: postgresql
 
   elasticsearch:
     url: http://10.16.1.10:9200
@@ -55,6 +55,9 @@ database:
 
     #username: username
     #password: password
+
+  postgresql:
+    managed: true
 
   # Retention period in days. 0 or comment out to disable.
   # Currently only applies to SQLite, not Elastic Search.
