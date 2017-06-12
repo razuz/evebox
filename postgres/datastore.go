@@ -353,7 +353,7 @@ and cast(s.source #>> '{flow,end}' AS timestamptz) >= $5
 	return nil, nil
 }
 
-func (d *PgDatastore) ArchiveAlertGroup(p core.AlertGroupQueryParams) (err error) {
+func (d *PgDatastore) ArchiveAlertGroup(p core.AlertGroupQueryParams, user core.User) (err error) {
 	var maxTime time.Time
 	if !p.MaxTimestamp.IsZero() {
 		maxTime = p.MaxTimestamp
@@ -415,7 +415,7 @@ where
 	return nil
 }
 
-func (d *PgDatastore) EscalateAlertGroup(p core.AlertGroupQueryParams) (err error) {
+func (d *PgDatastore) EscalateAlertGroup(p core.AlertGroupQueryParams, user core.User) (err error) {
 	var maxTime time.Time
 	if p.MaxTimestamp.IsZero() {
 		maxTime = time.Now()
@@ -475,7 +475,7 @@ where
 	return nil
 }
 
-func (d *PgDatastore) UnstarAlertGroup(p core.AlertGroupQueryParams) (err error) {
+func (d *PgDatastore) DeEscalateAlertGroup(p core.AlertGroupQueryParams, user core.User) (err error) {
 	var maxTime time.Time
 	if !p.MaxTimestamp.IsZero() {
 		maxTime = p.MaxTimestamp
