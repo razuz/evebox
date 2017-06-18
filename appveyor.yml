@@ -6,12 +6,12 @@ build: off
 
 test: off
 
-branches:
-  only:
-    - develop
-    - master
-    - release-staging
-    - release
+# branches:
+#   only:
+#     - develop
+#     - master
+#     - release-staging
+#     - release
 
 clone_folder: c:\gopath\src\github.com\jasonish\evebox
 
