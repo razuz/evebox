@@ -33,6 +33,11 @@
           <button *ngIf="rows && rows.length > 0 && getSelectedCount() > 0"
                   type="button"
                   class="btn btn-default"
+                  (click)="notifySelected()">Notify
+          </button>
+          <button *ngIf="rows && rows.length > 0 && getSelectedCount() > 0"
+                  type="button"
+                  class="btn btn-default"
                   (click)="archiveSelected()">Archive
           </button>
           <button *ngIf="rows && rows.length > 0 && getSelectedCount() > 0"

@@ -52,6 +52,7 @@ export class AlertTableComponent implements OnInit, OnDestroy {
     @Output() activeRowChange: EventEmitter<number> = new EventEmitter<number>();
     @Output() toggleEscalation: EventEmitter<any> = new EventEmitter<any>();
     @Output() archiveEvent: EventEmitter<any> = new EventEmitter<any>();
+    @Output() notifyEvent: EventEmitter<any> = new EventEmitter<any>();
 
     @Output() escalateAndArchiveEvent: EventEmitter<any> = new EventEmitter<any>();
 

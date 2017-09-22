@@ -7,6 +7,10 @@
                 (click)="goBack()">Back
         </button>
         <button type="button" class="btn btn-default"
+                *ngIf="showNotifyButton()"
+                (click)="notifyEvent()">Notify
+        </button>
+        <button type="button" class="btn btn-default"
                 *ngIf="showArchiveButton()"
                 (click)="archiveEvent()">Archive
         </button>
