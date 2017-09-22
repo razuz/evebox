@@ -154,7 +154,18 @@ export class ElasticSearchService {
     });
   }
 
-  escalateAlertGroup(alertGroup: AlertGroup): Promise<string> {
+    /**
+     * Notify an event.
+     *
+     * @param event An Elastic Search document.
+     */
+  notifyEvent(event: any): Promise<any> {
+      return this.submit(() => {
+          return this.api.post(`api/1/event/${event._id}/notify`, {});
+      });
+  }
+
+    escalateAlertGroup(alertGroup: AlertGroup): Promise<string> {
     return this.submit(() => {
       let request = {
         signature_id: alertGroup.event._source.alert.signature_id,
@@ -181,7 +192,20 @@ export class ElasticSearchService {
     });
   }
 
-  removeEscalatedStateFromAlertGroup(alertGroup: AlertGroup): Promise<string> {
+    notifyAlertGroup(alertGroup: AlertGroup) {
+      return this.submit(() => {
+          let request = {
+              signature_id: alertGroup.event._source.alert.signature_id,
+              src_ip: alertGroup.event._source.src_ip,
+              dest_ip: alertGroup.event._source.dest_ip,
+              min_timestamp: alertGroup.minTs,
+              max_timestamp: alertGroup.maxTs,
+          };
+          return this.api.post('api/1/alert-group/notify', request);
+      });
+    }
+
+    removeEscalatedStateFromAlertGroup(alertGroup: AlertGroup): Promise<string> {
     return this.submit(() => {
       let request = {
         signature_id: alertGroup.event._source.alert.signature_id,

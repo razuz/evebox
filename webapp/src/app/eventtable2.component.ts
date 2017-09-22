@@ -127,4 +127,8 @@ export class EveboxEventTable2Component {
         }
         this.elasticSearchService.archiveEvent(row);
     }
+
+    notify(row: any, $event?: any) {
+        this.elasticSearchService.notifyEvent(row);
+    }
 }

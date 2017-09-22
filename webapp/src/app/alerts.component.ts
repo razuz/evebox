@@ -301,6 +301,12 @@ export class AlertsComponent implements OnInit, OnDestroy {
             this.archiveAlertGroup(this.getActiveRow());
         }
     }
+    //possibly not needed
+    notifyActiveEvent() {
+        if (this.getActiveRowIndex() >= 0) {
+            this.notifyAlertGroup(this.getActiveRow());
+        }
+    }
 
     getActiveRow() {
         return this.rows[this.getActiveRowIndex()];
@@ -362,6 +368,39 @@ export class AlertsComponent implements OnInit, OnDestroy {
         }
         else if (this.getActiveRowIndex() > -1) {
             this.archiveAlertGroup(this.getActiveRow());
+        }
+    }
+
+    notifySelected() {
+        let selected = this.rows.filter((row: any) => {
+            return row.selected &&
+                row.event.event._source.tags.indexOf('notified') < 0;
+        });
+        selected.forEach((row: any) => {
+            this.notifyAlertGroup(row);
+        });
+    }
+
+    notifyAlertGroup(row: any) {
+
+        if (!row) {
+            return;
+        }
+
+        // Optimistically mark the event as archived.
+        row.event.event._source.tags.push('notified');
+
+        return this.elasticSearchService.notifyAlertGroup(row.event);
+    }
+
+    notifyEvents() {
+        // If rows are selected, archive the selected rows, otherwise archive
+        // the current active event.
+        if (this.getSelectedCount() > 0) {
+            this.notifySelected();
+        }
+        else if (this.getActiveRowIndex() > -1) {
+            this.notifyAlertGroup(this.getActiveRow());
         }
     }
 
