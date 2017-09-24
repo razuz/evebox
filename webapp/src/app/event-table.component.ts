@@ -154,4 +154,8 @@ export class EveboxEventTableComponent implements OnInit, OnDestroy {
             row._source.tags.push('evebox.archived');
         });
     }
+
+    notify(row: any, $event?: any) {
+        //FIXME : NOTIFY
+    }
 }

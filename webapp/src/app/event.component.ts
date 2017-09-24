@@ -257,6 +257,10 @@ export class EventComponent implements OnInit, OnDestroy {
         this.router.navigate(['/events', {q: q}]);
     }
 
+    notifyEvent() {
+
+    }
+
     archiveEvent() {
         if (this.alertGroup) {
             this.elasticSearch.archiveAlertGroup(this.alertGroup);

@@ -78,6 +78,12 @@ import {ElasticSearchService} from './elasticsearch.service';
       </td>
       <td style="word-break: break-all;">{{row |
         eveboxEventDescriptionPrinter}}
+        <div *ngIf="getEventType(row) == 'alert'"
+             class="pull-right">
+          <button type="button" class="btn btn-default"
+                  (click)="notify(row, $event)">Notify
+          </button>
+        </div>
         <div *ngIf="getEventType(row) == 'alert' && ! isArchived(row)"
              class="pull-right"
              (click)="$event.stopPropagation()">
